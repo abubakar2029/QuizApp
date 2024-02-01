@@ -1,5 +1,5 @@
 const express = require("express");
-
+const path = require("path");
 const app = express();
 /* ----uuid-generator-------- */
 const { v4: uuidv1 } = require("uuid");
@@ -81,7 +81,9 @@ app.post("/quiz-submit", (req, res) => {
 });
 
 app.use(express.static("./build"));
-
+app.get("/*", function (req, res) {
+  res.sendFile(path.join(__dirname, "build","index.html"));
+});
 app.listen(8080, () => {
   console.log("Server is running on port 8080");
 });
